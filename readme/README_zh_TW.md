@@ -30,10 +30,82 @@ pip install xy_django_serializer
 
 ## 使用
 
-```bash
-# bash
+
+#### 1. 建立解析類別
+
+```python
+# serializers.py
+
+from rest_framework import viewsets
+from xy_django_serializer.serializers import Serializer
+
+from .models import MImage
+
+
+class SImage(Serializer):
+    default_value = ""
+
+    class Meta:
+        model = MImage
+        fields = "__all__"
+
+class VSImage(viewsets.ModelViewSet):
+    queryset = MImage.objects.all()
+    serializer_class = SImage
 
 ```
+
+#### 2. 實作解析
+
+###### 1. 在Django專案的manage.py shell中調用
+
+```python
+# Python解释器
+from Demo.models import MDemo
+from Demo.serializers import SDemo
+
+demo_list = MDemo.objects.all()
+demo_dict_list = SDemo(demo_list, many=True).data
+print(demo_list)
+print(demo_dict_list))
+```
+
+###### 2. 在Tornado等其他運行環境中調用
+> <b>注意:</b> 必須先載入Django工程到運行的專案中
+
+```Python
+# Demoes.py
+from xy_request_handler_api.Api import Api
+from Demo.models import MDemo
+from Demo.serializers import SDemo
+
+class DemoApi(Api):
+    def check_xsrf_cookie(self) -> None:
+        return None
+
+    def check_origin(self, _):
+        return False
+
+    def fetch(self):
+        all_demo_list = MDemo.objects.all()
+        all_demo_dict_list = SDemo(all_demo_list, many=True).data
+        self.success()
+        self.data = {"all_demo_list": all_demo_dict_list}
+        self.xy_response()
+
+    def get(self):
+        self.fetch()
+
+    def post(self):
+        self.fetch()
+
+```
+
+##### 運轉 [範例工程](../samples/xy_web_server_demo)
+
+> 範例工程具體使用方式請移步 <b style="color: blue">xy_web_server.git</b> 下列倉庫
+> - <a href="https://github.com/xy-web-service/xy_web_server.git" target="_blank">Github位址</a>  
+> - <a href="https://gitee.com/xy-web-service/xy_web_server.git" target="_blank">Gitee位址</a>
 
 ## 許可證
 xy_django_serializer 根據 <木蘭寬鬆許可證, 第2版> 獲得許可。有關詳細信息，請參閱 [LICENSE](../LICENSE) 文件。

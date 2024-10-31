@@ -30,10 +30,81 @@ pip install xy_django_serializer
 
 ## How to use
 
-```bash
-# bash
+#### 1. Creating a parsing class
+
+```python
+# serializers.py
+
+from rest_framework import viewsets
+from xy_django_serializer.serializers import Serializer
+
+from .models import MImage
+
+
+class SImage(Serializer):
+    default_value = ""
+
+    class Meta:
+        model = MImage
+        fields = "__all__"
+
+class VSImage(viewsets.ModelViewSet):
+    queryset = MImage.objects.all()
+    serializer_class = SImage
 
 ```
+
+#### 2. Implementation analysis
+
+###### 1. Call in the manage.py shell of the Django project
+
+```python
+# Python解释器
+from Demo.models import MDemo
+from Demo.serializers import SDemo
+
+demo_list = MDemo.objects.all()
+demo_dict_list = SDemo(demo_list, many=True).data
+print(demo_list)
+print(demo_dict_list))
+```
+
+###### 2. Calling in other runtime environments such as Tornado
+> <b>Tip:</b> You must first load the Django project into the running project
+
+```Python
+# Demoes.py
+from xy_request_handler_api.Api import Api
+from Demo.models import MDemo
+from Demo.serializers import SDemo
+
+class DemoApi(Api):
+    def check_xsrf_cookie(self) -> None:
+        return None
+
+    def check_origin(self, _):
+        return False
+
+    def fetch(self):
+        all_demo_list = MDemo.objects.all()
+        all_demo_dict_list = SDemo(all_demo_list, many=True).data
+        self.success()
+        self.data = {"all_demo_list": all_demo_dict_list}
+        self.xy_response()
+
+    def get(self):
+        self.fetch()
+
+    def post(self):
+        self.fetch()
+
+```
+
+##### Run [Sample Project](../samples/xy_web_server_demo)
+
+> For detailed usage of the sample project, please go to the following repository <b style="color: blue">xy_web_server.git</b> 
+> - <a href="https://github.com/xy-web-service/xy_web_server.git" target="_blank">Github</a>  
+> - <a href="https://gitee.com/xy-web-service/xy_web_server.git" target="_blank">Gitee</a>
 
 ## License
 xy_django_serializer is licensed under the <Mulan Permissive Software License，Version 2>. See the [LICENSE](../LICENSE) file for more info.
