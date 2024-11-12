@@ -8,9 +8,8 @@
 -->
 # xy_django_serializer
 
-- [简体中文](../README.md)
-- [繁體中文](README.zh-hant.md)
-- [English](README.en.md)
+| [简体中文](../README.md)         | [繁體中文](./README.zh-hant.md)        |                      [English](./README.en.md)          |
+| ----------- | -------------|---------------------------------------|
 
 ## Description
 
@@ -18,9 +17,9 @@ Based on the djangorestframework's serializer parsing base class, it encapsulate
 
 ## Source Code Repositories
 
-- <a href="https://github.com/xy-web-service/xy_django_serializer.git" target="_blank">Github</a>  
-- <a href="https://gitee.com/xy-opensource/xy_django_serializer.git" target="_blank">Gitee</a>  
-- <a href="https://gitcode.com/xy-opensource/xy_django_serializer.git" target="_blank">GitCode</a>  
+| [Github](https://github.com/xy-web-service/xy_django_serializer.git)         | [Gitee](https://gitee.com/xy-opensource/xy_django_serializer.git)        |                      [GitCode](https://gitcode.com/xy-opensource/xy_django_serializer.git)          |
+| ----------- | -------------|---------------------------------------|
+
 
 ## Installation
 
@@ -104,9 +103,9 @@ class DemoApi(Api):
 ##### Run [Sample Project](../samples/xy_web_server_demo)
 
 > For detailed usage of the sample project, please go to the following repository <b style="color: blue">xy_web_server.git</b> 
-> - <a href="https://github.com/xy-web-service/xy_web_server.git" target="_blank">Github</a>  
-> - <a href="https://gitee.com/xy-opensource/xy_web_server.git" target="_blank">Gitee</a>  
-> - <a href="https://gitcode.com/xy-opensource/xy_web_server.git" target="_blank">GitCode</a>  
+
+| [Github](https://github.com/xy-web-service/xy_web_server.git)         | [Gitee](https://gitee.com/xy-opensource/xy_web_server.git)        |                      [GitCode](https://gitcode.com/xy-opensource/xy_web_server.git)          |
+| ----------- | -------------|---------------------------------------|
 
 ## License
 xy_django_serializer is licensed under the <Mulan Permissive Software License，Version 2>. See the [LICENSE](../LICENSE) file for more info.
